@@ -8,18 +8,15 @@ import { ref, get, set } from "firebase/database";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+//app.use(express.urlencoded({ extended: true }));
 
 // Rota raiz direciona para a pasta front
 app.use("/", express.static("./front"));
 
 app.get("/bandas", function (req, res) {
-  console.log("recebi um get");
   let bandasRef = ref(database, "/bandas");
   get(bandasRef).then((snap) => {
     let listaBandas = snap.val();
-    console.log("snap " + snap.val());
-    console.log("listaBandas", listaBandas);
     return res.status(200).json(listaBandas);
   });
 });
@@ -33,7 +30,6 @@ app.post("/bandas", function (req, res) {
   let novaBandaRef = ref(database, "/bandas/" + id);
   // Adiciona dados no firebase no caminho /bandas/<ID>
   set(novaBandaRef, dados).then(() => {
-    console.log("Adicionado");
     return res.status(200).json(dados);
   });
 });
