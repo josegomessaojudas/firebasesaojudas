@@ -43,8 +43,6 @@ app.post("/cliente", function (req, res) {
   });
 });
 
-
-
 app.put("/bandas/:id", function (req, res) {
   console.log("recebi requisição PUT com body: ", req.body);
   //pega os dados enviados na requisição
